@@ -1,0 +1,9 @@
+# Inference (what the evaluator needs). Python 3.11.
+# Versions verified together on 2026-11-07; re-pin with `pip freeze` after your final run.
+mediapipe==1.2.2
+ai-edge-litert==2.3.0
+opencv-python-headless==5.0.0.93
+numpy==2.4.6
+
+# Training / conversion only (not needed by predict()):
+#   pip install -r src/requirements-train.txt

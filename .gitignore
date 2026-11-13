@@ -1,0 +1,11 @@
+data/
+runs/
+venv/
+.venv/
+__pycache__/
+*.pyc
+results/power/
+results/timings.json
+# never commit third-party dataset files (WLASL C-UDA, ASL Citizen, Kaggle rules)
+*.mp4
+*.npz

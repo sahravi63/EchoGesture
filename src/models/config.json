@@ -1,0 +1,15 @@
+{
+  "model": "echogesture_int8.tflite",
+  "preset": "full",
+  "extractor": "holistic",
+  "target_fps": 15,
+  "threads": 4,
+  "models": [
+    "echogesture_int8_s1.tflite",
+    "echogesture_int8_s2.tflite",
+    "echogesture_int8_s3.tflite"
+  ],
+  "tta": 2,
+  "gap_fill": true,
+  "low_light": true
+}
