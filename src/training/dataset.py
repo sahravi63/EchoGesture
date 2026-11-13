@@ -50,8 +50,16 @@ class Loader(keras.utils.PyDataset):
     """Yields (windows [B,64,C], one-hot labels [B,K]). Augments when train=True."""
 
     def __init__(self, ds: Packed, idx, num_classes, batch_size=128, preset="full",
-                 train=True, seed=0, label_map=None, **kw):
+                 train=True, seed=0, label_map=None, alt: Packed | None = None, p_alt=0.0, **kw):
         super().__init__(**kw)
+        # v12: alt = the same clips with landmarks taken from REALLY occluded video
+        # (tools/extract_occluded.py). When training, a clip is swapped for its occluded
+        # version with probability p_alt; the epoch length and the label stay the same.
+        self.alt, self.p_alt = alt, p_alt
+        self.alt_of = {}
+        if alt is not None and p_alt > 0:
+            where = {str(v): j for j, v in enumerate(alt.ids)}
+            self.alt_of = {int(i): where[str(ds.ids[i])] for i in idx if str(ds.ids[i]) in where}
         self.ds, self.idx = ds, np.asarray(idx)
         self.k, self.bs, self.preset, self.train = num_classes, batch_size, preset, train
         self.rng = np.random.default_rng(seed)
@@ -73,7 +81,11 @@ class Loader(keras.utils.PyDataset):
         y = np.zeros((len(sel), self.k), np.float32)
         rng = np.random.default_rng(self.rng.integers(1 << 31)) if self.train else None
         for j, i in enumerate(sel):
-            f = self.ds.clip(i)
+            j_alt = self.alt_of.get(int(i)) if self.train else None
+            if j_alt is not None and rng.random() < self.p_alt:
+                f = self.alt.clip(j_alt)
+            else:
+                f = self.ds.clip(i)
             if self.train:
                 f = augment(f, rng)
             x[j] = build_window(f, self.preset)

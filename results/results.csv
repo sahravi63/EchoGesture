@@ -1,7 +1,7 @@
 metric,target,measured,unit,device,runtime,pass
-top1_accuracy,>=70,75.39,%,Kaggle CPU,"LiteRT INT8, 3 model(s) x TTA 2, MediaPipe Holistic",PASS
-latency_p95,<=50,37.04,ms,Kaggle CPU,"LiteRT INT8 XNNPACK, 3 model(s) x TTA 2, 4 threads",PASS
+top1_accuracy,>=70,76.97,%,Kaggle CPU,"LiteRT INT8, 3 model(s) x TTA 2, MediaPipe Holistic",PASS
+latency_p95,<=50,37.33,ms,Kaggle CPU,"LiteRT INT8 XNNPACK, 3 model(s) x TTA 2, 4 threads",PASS
 model_size,<=25,6.33,MB,-,INT8 .tflite total (3 model(s) x TTA 2),PASS
-accuracy_drop_robustness,<=5,7.0,pt,Kaggle CPU,"LiteRT INT8, 3 model(s) x TTA 2",FAIL
+accuracy_drop_robustness,<=5,5.87,pt,Kaggle CPU,"LiteRT INT8, 3 model(s) x TTA 2",FAIL
 avg_power,<=500,,mW,,,
-thermal_drift_10min,<=20,,%,,,
+thermal_drift_10min,<=20,14.7,%,"Redmi Note 12 Pro 5G (22101316I, MediaTek Dimensity 1080)","LiteRT benchmark_model, INT8 classifier, 4 CPU threads",PASS

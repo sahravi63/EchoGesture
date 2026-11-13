@@ -75,6 +75,8 @@ def main():
     ap.add_argument("--val-split", default="val")
     ap.add_argument("--workers", type=int, default=4)
     ap.add_argument("--seed", type=int, default=42)
+    ap.add_argument("--alt-data", help="v12: packed landmarks of the same clips from occluded video")
+    ap.add_argument("--p-alt", type=float, default=0.3, help="chance a training clip uses its occluded copy")
     a = ap.parse_args()
 
     keras.utils.set_random_seed(a.seed)
@@ -109,7 +111,10 @@ def main():
                  keras.metrics.TopKCategoricalAccuracy(k=5, name="top5")])
 
     kw = dict(workers=a.workers, use_multiprocessing=False)
-    train_ld = Loader(ds, tr, K, a.bs, a.preset, True, a.seed, label_map, **kw)
+    alt = Packed(a.alt_data) if a.alt_data else None
+    train_ld = Loader(ds, tr, K, a.bs, a.preset, True, a.seed, label_map, alt=alt, p_alt=a.p_alt, **kw)
+    if alt is not None:
+        print(f"occluded copies: {len(train_ld.alt_of)}/{len(tr)} training clips, used with p={a.p_alt}")
     val_ld = Loader(ds, va, K, 256, a.preset, False, 0, label_map, **kw) if len(va) else None
     cbs = [SaveBest(inner, str(out / "best.keras")), keras.callbacks.CSVLogger(str(out / "history.csv"))]
     if a.awp > 0:

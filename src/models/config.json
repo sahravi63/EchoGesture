@@ -11,5 +11,6 @@
   ],
   "tta": 2,
   "gap_fill": true,
-  "low_light": true
+  "low_light": true,
+  "reset_per_clip": true
 }

@@ -48,7 +48,9 @@ def clip_frames(eg, frames, fps, truth, note=None):
         hud.draw_hands(f, rows[min(len(rows) - 1, i // step)])
         img, _ = hud.letterbox(f, W, H)
         yield hud.draw(img, status="SIGNING", note=note)
-    f = frames[-1].copy()
+    # hold the result over the last properly lit frame (many clips fade to black at the end)
+    lit = [i for i in range(len(frames)) if float(frames[i][::8, ::8].mean()) > 25]
+    f = frames[lit[-1] if lit else len(frames) // 2].copy()
     img, _ = hud.letterbox(f, W, H)
     res = hud.draw(img, status="RESULT", caption=top[0][0], confidence=top[0][1], top=top,
                    latency_ms=ms, truth=truth, note=note)

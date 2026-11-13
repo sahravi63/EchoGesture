@@ -52,8 +52,11 @@ def _load():
     _load_model()
     if _extractor is None:
         from echogesture.landmarks import LandmarkExtractor
+        # reset_per_clip (v11): a fresh MediaPipe graph for every clip, so a clip's result never
+        # depends on which clip ran before it (tracking state otherwise carries over)
         _extractor = LandmarkExtractor(CFG.get("extractor", "holistic"), CFG.get("target_fps", 15),
-                                       low_light=CFG.get("low_light", False))
+                                       low_light=CFG.get("low_light", False),
+                                       reset_per_clip=CFG.get("reset_per_clip", False))
 
 
 def _load_model():

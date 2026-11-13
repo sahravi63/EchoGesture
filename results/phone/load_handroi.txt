@@ -1,0 +1,25 @@
+INFO: STARTING!
+INFO: Log parameter values verbosely: [0]
+INFO: Min num runs: [1000000]
+INFO: Max runs duration (seconds): [600]
+INFO: Inter-run delay (seconds): [0.0333]
+INFO: Num threads: [1]
+INFO: Min warmup runs: [1]
+INFO: Graph: [/data/local/tmp/eg/hand_roi_refinement.tflite]
+INFO: Signature to run: []
+INFO: #threads used for CPU inference: [1]
+INFO: Loaded model /data/local/tmp/eg/hand_roi_refinement.tflite
+INFO: Initialized TensorFlow Lite runtime.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+VERBOSE: Replacing 141 out of 141 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 1 partitions for subgraph 0.
+INFO: The input model file size (MB): 0.088382
+INFO: Initialized session in 12.439ms.
+INFO: Running benchmark for at least 1 iterations and at least 0.5 seconds but terminate if exceeding 600 seconds.
+INFO: count=12 first=12192 curr=11993 min=1783 max=14893 avg=9066.08 std=4697 p5=1783 median=11899 p95=14893
+
+INFO: Running benchmark for at least 1000000 iterations and at least 1 seconds but terminate if exceeding 600 seconds.
+INFO: count=12646 first=11653 curr=10343 min=1443 max=68223 avg=13519.3 std=6753 p5=8600 median=10440 p95=27319
+
+INFO: Inference timings in us: Init: 12439, First inference: 12192, Warmup (avg): 9066.08, Inference (avg): 13519.3
+INFO: Note: as the benchmark tool itself affects memory footprint, the following is only APPROXIMATE to the actual memory footprint of the model at runtime. Take the information at your discretion.
+INFO: Memory footprint delta from the start of the tool (MB): init=6.94922 overall=8.67188
