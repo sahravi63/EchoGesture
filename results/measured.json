@@ -1,15 +1,15 @@
 {
   "top1_accuracy": {
-    "value": 76.97,
+    "value": 76.34,
     "device": "Kaggle CPU",
     "runtime": "LiteRT INT8, 3 model(s) x TTA 2, MediaPipe Holistic",
     "note": "predict() end to end on 317 official WLASL300 test videos, top-5 94.32%; each clip independent (fresh MediaPipe graph); forward vs reversed order agree 317/317"
   },
   "latency_p95": {
-    "value": 37.33,
+    "value": 35.26,
     "device": "Kaggle CPU",
     "runtime": "LiteRT INT8 XNNPACK, 3 model(s) x TTA 2, 4 threads",
-    "note": "features + all models/TTA p50 34.24 ms over 1000 runs; landmarks 52.4 ms/frame; end-of-sign 85.0 ms; whole clip 2447 ms"
+    "note": "features + all models/TTA p50 33.10 ms over 1000 runs; landmarks 48.6 ms/frame; end-of-sign 78.5 ms; whole clip 2273 ms"
   },
   "model_size": {
     "value": 6.33,
@@ -17,10 +17,10 @@
     "runtime": "INT8 .tflite total (3 model(s) x TTA 2)"
   },
   "accuracy_drop_robustness": {
-    "value": 5.87,
+    "value": 4.98,
     "device": "Kaggle CPU",
     "runtime": "LiteRT INT8, 3 model(s) x TTA 2",
-    "note": "317 test videos end to end; clean 76.97%; drops {\"low_light\": 4.42, \"blur\": 7.89, \"occlusion\": 13.88, \"rotate\": 1.58, \"drop\": 1.58}"
+    "note": "317 test videos end to end; clean 76.34%; drops {\"low_light\": 2.84, \"blur\": 6.94, \"occlusion\": 13.56, \"rotate\": 0.32, \"drop\": 1.26}"
   },
   "thermal_drift_10min": {
     "value": 14.7,

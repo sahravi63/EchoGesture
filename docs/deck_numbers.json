@@ -1,22 +1,22 @@
 {
- "top1": "77.0",
+ "top1": "76.3",
  "top5": "94.3",
- "latency_p95": "37.3",
+ "latency_p95": "35.3",
  "model_size": "6.3",
- "landmark_ms": "52",
- "drop": "5.9",
+ "landmark_ms": "49",
+ "drop": "5.0",
  "occ_drop": "14",
  "csv": [
   [
    "top1_accuracy",
    ">=70 %",
-   "76.97 %",
+   "76.34 %",
    "PASS"
   ],
   [
    "latency_p95",
    "<=50 ms",
-   "37.33 ms",
+   "35.26 ms",
    "PASS"
   ],
   [
@@ -28,8 +28,8 @@
   [
    "accuracy_drop_robustness",
    "<=5 pt",
-   "5.87 pt",
-   "FAIL"
+   "4.98 pt",
+   "PASS"
   ],
   [
    "avg_power",
@@ -46,12 +46,12 @@
  ],
  "csv_note": "4-core Kaggle CPU, LiteRT INT8 + XNNPACK, 3 models x 2 views. Accuracy: predict() end to end on the 317 official WLASL300 test videos (top-5 94.32%). Thermal: Redmi Note 12 Pro 5G CPU; the phone blocks battery-current reads over adb.",
  "robust": {
-  "clean": 76.97,
-  "low light": 72.56,
-  "blur": 69.09,
-  "occlusion": 63.09,
-  "tilt 15°": 75.39,
-  "frame drop": 75.39
+  "clean": 76.34,
+  "low light": 73.5,
+  "blur": 69.4,
+  "occlusion": 62.78,
+  "tilt 15°": 76.03,
+  "frame drop": 75.08
  },
- "sample_json": "{\"clip_id\": \"17713\", \"prediction\": \"DRINK\",\n \"top5\": [\"DRINK\", \"MOTHER\", ...],\n \"confidence\": 0.9976, \"latency_ms\": 32.2}"
+ "sample_json": "{\"clip_id\": \"17713\", \"prediction\": \"DRINK\",\n \"top5\": [\"DRINK\", \"FULL\", ...],\n \"confidence\": 0.9969, \"latency_ms\": 30.26}"
 }

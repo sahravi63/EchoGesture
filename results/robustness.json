@@ -1,21 +1,21 @@
 {
  "clips": 317,
  "accuracy": {
-  "clean": 76.97160883280758,
-  "low_light": 72.55520504731861,
-  "blur": 69.08517350157729,
-  "occlusion": 63.09148264984227,
-  "rotate": 75.39432176656152,
-  "drop": 75.39432176656152
+  "clean": 76.34069400630915,
+  "low_light": 73.50157728706624,
+  "blur": 69.4006309148265,
+  "occlusion": 62.77602523659306,
+  "rotate": 76.02523659305994,
+  "drop": 75.0788643533123
  },
  "drop": {
-  "low_light": 4.416403785488967,
-  "blur": 7.886435331230288,
-  "occlusion": 13.880126182965306,
-  "rotate": 1.5772870662460576,
-  "drop": 1.5772870662460576
+  "low_light": 2.8391167192429094,
+  "blur": 6.940063091482656,
+  "occlusion": 13.564668769716093,
+  "rotate": 0.31545741324920584,
+  "drop": 1.2618296529968518
  },
- "mean_drop": 5.867507886435336,
+ "mean_drop": 4.984227129337543,
  "self_check": {
   "agree": 40,
   "of": 40
@@ -177,11 +177,11 @@
   {
    "video_id": "21890",
    "clean": "WHAT",
-   "low_light": "HUMBLE",
+   "low_light": "LAST",
    "blur": "WHAT",
    "occlusion": "HELP",
    "rotate": "WHAT",
-   "drop": "WHAT",
+   "drop": "DISAPPEAR",
    "true": "FINE"
   },
   {
@@ -301,16 +301,16 @@
    "clean": "COOL",
    "low_light": "COOL",
    "blur": "COOL",
-   "occlusion": "WHO",
+   "occlusion": "THIN",
    "rotate": "COOL",
    "drop": "COOL",
    "true": "COOL"
   },
   {
    "video_id": "21944",
-   "clean": "FINISH",
+   "clean": "MOTHER",
    "low_light": "FINISH",
-   "blur": "FINISH",
+   "blur": "MOTHER",
    "occlusion": "FINISH",
    "rotate": "FINISH",
    "drop": "MOTHER",
@@ -359,10 +359,10 @@
   },
   {
    "video_id": "62967",
-   "clean": "HEART",
-   "low_light": "NEW",
+   "clean": "CEREAL",
+   "low_light": "GOOD",
    "blur": "NEW",
-   "occlusion": "HEART",
+   "occlusion": "GOOD",
    "rotate": "GOOD",
    "drop": "SHARE",
    "true": "WHAT"
@@ -391,8 +391,8 @@
    "video_id": "63664",
    "clean": "WOMAN",
    "low_light": "WOMAN",
-   "blur": "FINE",
-   "occlusion": "DRINK",
+   "blur": "WOMAN",
+   "occlusion": "MOTHER",
    "rotate": "WOMAN",
    "drop": "WOMAN",
    "true": "WOMAN"
@@ -410,7 +410,7 @@
   {
    "video_id": "07400",
    "clean": "DOG",
-   "low_light": "PANTS",
+   "low_light": "RUSSIA",
    "blur": "DOG",
    "occlusion": "DOG",
    "rotate": "DOG",
@@ -503,7 +503,7 @@
    "clean": "LANGUAGE",
    "low_light": "LANGUAGE",
    "blur": "LANGUAGE",
-   "occlusion": "RUN",
+   "occlusion": "FAR",
    "rotate": "LANGUAGE",
    "drop": "LANGUAGE",
    "true": "LANGUAGE"
@@ -615,8 +615,8 @@
    "clean": "SECRETARY",
    "low_light": "SECRETARY",
    "blur": "SECRETARY",
-   "occlusion": "GOOD",
-   "rotate": "SECRETARY",
+   "occlusion": "WRITE",
+   "rotate": "WRITE",
    "drop": "SECRETARY",
    "true": "COLOR"
   },
@@ -627,14 +627,14 @@
    "blur": "HOPE",
    "occlusion": "NO",
    "rotate": "PRESIDENT",
-   "drop": "NONE",
+   "drop": "HOPE",
    "true": "CORN"
   },
   {
    "video_id": "13334",
    "clean": "CORN",
    "low_light": "APPLE",
-   "blur": "FULL",
+   "blur": "KNOW",
    "occlusion": "CORN",
    "rotate": "CORN",
    "drop": "CORN",
@@ -675,7 +675,7 @@
    "clean": "DOCTOR",
    "identity": "DOCTOR",
    "low_light": "DOCTOR",
-   "blur": "MEDICINE",
+   "blur": "DOCTOR",
    "occlusion": "DOCTOR",
    "rotate": "DOCTOR",
    "drop": "DOCTOR",
@@ -886,10 +886,10 @@
   {
    "video_id": "08429",
    "clean": "NO",
-   "low_light": "NO",
+   "low_light": "PIZZA",
    "blur": "NO",
    "occlusion": "PIZZA",
-   "rotate": "NO",
+   "rotate": "PIZZA",
    "drop": "NO",
    "true": "BUT"
   },
@@ -1030,7 +1030,7 @@
    "clean": "TELL",
    "low_light": "TELL",
    "blur": "TELL",
-   "occlusion": "TELL",
+   "occlusion": "THIN",
    "rotate": "TELL",
    "drop": "TELL",
    "true": "TELL"
@@ -1038,7 +1038,7 @@
   {
    "video_id": "62113",
    "clean": "WAIT",
-   "low_light": "WAIT",
+   "low_light": "MANY",
    "blur": "WANT",
    "occlusion": "WAIT",
    "rotate": "WANT",
@@ -1090,7 +1090,7 @@
    "video_id": "05089",
    "clean": "GIRL",
    "low_light": "GIRL",
-   "blur": "MOTHER",
+   "blur": "WHO",
    "occlusion": "AFRICA",
    "rotate": "GIRL",
    "drop": "GIRL",
@@ -1120,7 +1120,7 @@
    "video_id": "10186",
    "clean": "WRITE",
    "low_light": "WRITE",
-   "blur": "WRITE",
+   "blur": "DANCE",
    "occlusion": "WRITE",
    "rotate": "WRITE",
    "drop": "WRITE",
@@ -1139,9 +1139,9 @@
   {
    "video_id": "14190",
    "clean": "CRY",
-   "low_light": "PAINT",
+   "low_light": "CRY",
    "blur": "SIGN",
-   "occlusion": "PAINT",
+   "occlusion": "CRY",
    "rotate": "CRY",
    "drop": "CRY",
    "true": "CRY"
@@ -1194,7 +1194,7 @@
    "blur": "CAT",
    "occlusion": "CANDY",
    "rotate": "CANDY",
-   "drop": "CANDY",
+   "drop": "CAT",
    "true": "LAUGH"
   },
   {
@@ -1210,8 +1210,8 @@
   {
    "video_id": "45837",
    "clean": "RABBIT",
-   "low_light": "HAT",
-   "blur": "TEACH",
+   "low_light": "RABBIT",
+   "blur": "HALLOWEEN",
    "occlusion": "RABBIT",
    "rotate": "RABBIT",
    "drop": "RABBIT",
@@ -1292,7 +1292,7 @@
    "video_id": "56701",
    "clean": "TAKE",
    "low_light": "TAKE",
-   "blur": "STAY",
+   "blur": "WALK",
    "occlusion": "TAKE",
    "rotate": "TAKE",
    "drop": "TAKE",
@@ -1393,7 +1393,7 @@
    "video_id": "08706",
    "clean": "PRACTICE",
    "low_light": "PRACTICE",
-   "blur": "FRIEND",
+   "blur": "TRAIN",
    "occlusion": "PRACTICE",
    "rotate": "PRACTICE",
    "drop": "PRACTICE",
@@ -1452,7 +1452,7 @@
   },
   {
    "video_id": "21078",
-   "clean": "GOVERNMENT",
+   "clean": "THEORY",
    "low_light": "LATER",
    "blur": "LATER",
    "occlusion": "GOVERNMENT",
@@ -1474,7 +1474,7 @@
    "video_id": "25072",
    "clean": "GOOD",
    "low_light": "GOOD",
-   "blur": "GOOD",
+   "blur": "LIST",
    "occlusion": "GOOD",
    "rotate": "GOOD",
    "drop": "GOOD",
@@ -1506,7 +1506,7 @@
    "clean": "HOME",
    "low_light": "HOME",
    "blur": "HOME",
-   "occlusion": "GIVE",
+   "occlusion": "HOME",
    "rotate": "HOME",
    "drop": "HOME",
    "true": "HOME"
@@ -1543,10 +1543,10 @@
   },
   {
    "video_id": "34004",
-   "clean": "LOSE",
+   "clean": "APPROVE",
    "low_light": "APPROVE",
    "blur": "APPROVE",
-   "occlusion": "LOSE",
+   "occlusion": "APPROVE",
    "rotate": "LOSE",
    "drop": "APPROVE",
    "true": "LOSE"
@@ -1568,7 +1568,7 @@
    "low_light": "OLD",
    "blur": "OLD",
    "occlusion": "SOON",
-   "rotate": "THIN",
+   "rotate": "OLD",
    "drop": "OLD",
    "true": "OLD"
   },
@@ -1584,11 +1584,11 @@
   },
   {
    "video_id": "53296",
-   "clean": "NAME",
+   "clean": "SOON",
    "low_light": "NAME",
-   "blur": "NAME",
+   "blur": "SOON",
    "occlusion": "NAME",
-   "rotate": "NAME",
+   "rotate": "SOON",
    "drop": "NAME",
    "true": "SOON"
   },
@@ -1634,12 +1634,12 @@
   },
   {
    "video_id": "69547",
-   "clean": "YOU",
+   "clean": "YES",
    "low_light": "YES",
-   "blur": "YOU",
+   "blur": "YES",
    "occlusion": "YES",
-   "rotate": "YOU",
-   "drop": "YOU",
+   "rotate": "YES",
+   "drop": "YES",
    "true": "YOU"
   },
   {
@@ -1657,16 +1657,16 @@
    "video_id": "03120",
    "clean": "APPROVE",
    "low_light": "APPROVE",
-   "blur": "LOSE",
-   "occlusion": "CHEESE",
-   "rotate": "GRADUATE",
-   "drop": "GRADUATE",
+   "blur": "APPROVE",
+   "occlusion": "GRADUATE",
+   "rotate": "APPROVE",
+   "drop": "APPROVE",
    "true": "APPROVE"
   },
   {
    "video_id": "03445",
    "clean": "ALL",
-   "low_light": "NEW",
+   "low_light": "ALL",
    "blur": "ALL",
    "occlusion": "ALL",
    "rotate": "ALL",
@@ -1809,7 +1809,7 @@
    "clean": "CONVINCE",
    "identity": "CONVINCE",
    "low_light": "CONVINCE",
-   "blur": "CONVINCE",
+   "blur": "CHAT",
    "occlusion": "CONVINCE",
    "rotate": "CONVINCE",
    "drop": "CONVINCE",
@@ -1858,7 +1858,7 @@
   {
    "video_id": "17665",
    "clean": "FAT",
-   "low_light": "FAT",
+   "low_light": "CLOTHES",
    "blur": "FAT",
    "occlusion": "STUDY",
    "rotate": "FAT",
@@ -1912,7 +1912,7 @@
    "low_light": "FAT",
    "blur": "FAT",
    "occlusion": "FAT",
-   "rotate": "FRIENDLY",
+   "rotate": "FAT",
    "drop": "FRIENDLY",
    "true": "FAT"
   },
@@ -1951,7 +1951,7 @@
    "clean": "FOOTBALL",
    "low_light": "FOOTBALL",
    "blur": "FOOTBALL",
-   "occlusion": "FOOTBALL",
+   "occlusion": "SOON",
    "rotate": "FOOTBALL",
    "drop": "FOOTBALL",
    "true": "FOOTBALL"
@@ -1980,7 +1980,7 @@
   {
    "video_id": "24606",
    "clean": "ORANGE",
-   "low_light": "THANKSGIVING",
+   "low_light": "ORANGE",
    "blur": "WHO",
    "occlusion": "OLD",
    "rotate": "THANKSGIVING",
@@ -2023,7 +2023,7 @@
    "low_light": "HERE",
    "blur": "HERE",
    "occlusion": "HERE",
-   "rotate": "HERE",
+   "rotate": "BRING",
    "drop": "HERE",
    "true": "HERE"
   },
@@ -2042,7 +2042,7 @@
    "clean": "MORE",
    "low_light": "MORE",
    "blur": "MORE",
-   "occlusion": "MORE",
+   "occlusion": "HOPE",
    "rotate": "MORE",
    "drop": "MORE",
    "true": "HOPE"
@@ -2090,10 +2090,10 @@
   },
   {
    "video_id": "30153",
-   "clean": "RUN",
+   "clean": "CHANGE",
    "low_light": "CHANGE",
    "blur": "CHANGE",
-   "occlusion": "LAW",
+   "occlusion": "FAR",
    "rotate": "CHANGE",
    "drop": "CHANGE",
    "true": "INTEREST"
@@ -2151,8 +2151,8 @@
   },
   {
    "video_id": "35305",
-   "clean": "DISCUSS",
-   "low_light": "DISCUSS",
+   "clean": "TRADE",
+   "low_light": "MEAN",
    "blur": "DISCUSS",
    "occlusion": "DISCUSS",
    "rotate": "DISCUSS",
@@ -2166,7 +2166,7 @@
    "blur": "INTEREST",
    "occlusion": "WINDOW",
    "rotate": "INTEREST",
-   "drop": "INTEREST",
+   "drop": "SICK",
    "true": "MEAN"
   },
   {
@@ -2204,7 +2204,7 @@
    "clean": "MUSIC",
    "low_light": "MUSIC",
    "blur": "MUSIC",
-   "occlusion": "DAUGHTER",
+   "occlusion": "BABY",
    "rotate": "MUSIC",
    "drop": "MUSIC",
    "true": "MUSIC"
@@ -2306,7 +2306,7 @@
    "clean": "PARTY",
    "low_light": "PARTY",
    "blur": "PARTY",
-   "occlusion": "PARTY",
+   "occlusion": "PURPLE",
    "rotate": "PARTY",
    "drop": "PARTY",
    "true": "PARTY"
@@ -2373,13 +2373,13 @@
   },
   {
    "video_id": "44081",
-   "clean": "CHEAT",
-   "identity": "CHEAT",
+   "clean": "SAME",
+   "identity": "SAME",
    "low_light": "SAME",
    "blur": "CHEAT",
    "occlusion": "SAME",
    "rotate": "CHEAT",
-   "drop": "CHEAT",
+   "drop": "PRACTICE",
    "true": "PRACTICE"
   },
   {
@@ -2407,7 +2407,7 @@
    "clean": "RESTAURANT",
    "low_light": "RESTAURANT",
    "blur": "RESTAURANT",
-   "occlusion": "IMPROVE",
+   "occlusion": "LATE",
    "rotate": "RESTAURANT",
    "drop": "RESTAURANT",
    "true": "RESTAURANT"
@@ -2416,7 +2416,7 @@
    "video_id": "47657",
    "clean": "WATER",
    "low_light": "RESTAURANT",
-   "blur": "THANKSGIVING",
+   "blur": "RESTAURANT",
    "occlusion": "WATER",
    "rotate": "WATER",
    "drop": "WATER",
@@ -2447,7 +2447,7 @@
    "clean": "SALT",
    "low_light": "SALT",
    "blur": "SALT",
-   "occlusion": "CHAIR",
+   "occlusion": "SALT",
    "rotate": "SALT",
    "drop": "SALT",
    "true": "SALT"
@@ -2569,7 +2569,7 @@
    "clean": "THEORY",
    "low_light": "THEORY",
    "blur": "THEORY",
-   "occlusion": "BATHROOM",
+   "occlusion": "BECAUSE",
    "rotate": "THEORY",
    "drop": "THEORY",
    "true": "THEORY"
@@ -2630,7 +2630,7 @@
    "clean": "WHERE",
    "low_light": "HEAR",
    "blur": "HEAR",
-   "occlusion": "WHERE",
+   "occlusion": "DOG",
    "rotate": "WHERE",
    "drop": "WHERE",
    "true": "WHERE"
@@ -2640,8 +2640,8 @@
    "clean": "BROWN",
    "low_light": "BROWN",
    "blur": "BROWN",
-   "occlusion": "MOTHER",
-   "rotate": "BROWN",
+   "occlusion": "BED",
+   "rotate": "YOUR",
    "drop": "BROWN",
    "true": "YOUR"
   },
@@ -2712,7 +2712,7 @@
    "low_light": "BABY",
    "blur": "CHEESE",
    "occlusion": "BABY",
-   "rotate": "CHEESE",
+   "rotate": "COOK",
    "drop": "BABY",
    "true": "BABY"
   },
@@ -2723,7 +2723,7 @@
    "blur": "BACK",
    "occlusion": "PIZZA",
    "rotate": "BACK",
-   "drop": "BACK",
+   "drop": "PIZZA",
    "true": "BACK"
   },
   {
@@ -2834,7 +2834,7 @@
    "blur": "SCHOOL",
    "occlusion": "DAUGHTER",
    "rotate": "PAPER",
-   "drop": "SCHOOL",
+   "drop": "IMPROVE",
    "true": "CHEESE"
   },
   {
@@ -2885,7 +2885,7 @@
    "blur": "HAPPY",
    "occlusion": "DELAY",
    "rotate": "HAPPY",
-   "drop": "DELAY",
+   "drop": "HAPPY",
    "true": "DELAY"
   },
   {
@@ -3056,7 +3056,7 @@
    "low_light": "BROTHER",
    "blur": "RIGHT",
    "occlusion": "RIGHT",
-   "rotate": "HARD",
+   "rotate": "RIGHT",
    "drop": "RIGHT",
    "true": "HARD"
   },
@@ -3066,14 +3066,14 @@
    "low_light": "HARD",
    "blur": "CHAMPION",
    "occlusion": "HARD",
-   "rotate": "HARD",
+   "rotate": "CHAMPION",
    "drop": "HARD",
    "true": "HARD"
   },
   {
    "video_id": "28150",
    "clean": "LATER",
-   "low_light": "LATER",
+   "low_light": "HOUR",
    "blur": "HOUR",
    "occlusion": "LATER",
    "rotate": "HOUR",
@@ -3146,7 +3146,7 @@
    "clean": "JUMP",
    "low_light": "RIDE",
    "blur": "RIDE",
-   "occlusion": "MEAN",
+   "occlusion": "DANCE",
    "rotate": "JUMP",
    "drop": "DANCE",
    "true": "JUMP"
@@ -3227,8 +3227,8 @@
    "clean": "MONEY",
    "low_light": "DISCUSS",
    "blur": "DISCUSS",
-   "occlusion": "DISCUSS",
-   "rotate": "DISCUSS",
+   "occlusion": "HELP",
+   "rotate": "MONEY",
    "drop": "MONEY",
    "true": "MONEY"
   }

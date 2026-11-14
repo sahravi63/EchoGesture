@@ -1,1 +1,1 @@
-v12 (2026-11-13): trained with landmarks of really occluded train/val videos (run08); every clip independent
+v13 (2026-11-14): trained with landmarks of really occluded, blurred and darkened train/val videos (run09); every clip independent

@@ -291,8 +291,8 @@ def build(a):
     ca = ch.category_axis
     ca.tick_labels.font.size = Pt(9); ca.tick_labels.font.color.rgb = rgb(TEXT)
     ca.format.line.color.rgb = rgb(EDGE)
-    text(s5, 5.45, 3.62, 4.1, 0.3, f"Mean drop {N['drop']} pt (v7: 9.6); occlusion 22.4 -> 13.9 pt "
-         "after training on really occluded video.", size=10, color=MUTED)
+    text(s5, 5.45, 3.62, 4.1, 0.3, f"Mean drop {N['drop']} pt (v7: 9.6), just inside the 5 pt target; "
+         "trained on really occluded, blurred and dark video.", size=10, color=MUTED)
     box(s5, 5.45, 4.0, 4.1, 1.25, fill="0E1630")
     text(s5, 5.58, 4.07, 3.9, 0.25, "predict(\"17713.mp4\")  ->  one line of predictions.jsonl (real output)",
          size=10, bold=True, color=CYAN)
@@ -307,7 +307,7 @@ def build(a):
         ("Honest numbers", "Official test split only. We caught and removed a signer-overlap leak "
                            "(92% -> real 67%) before building on it.", AMBER),
         ("Robustness engineered", "Auto-exposure, gap filling and training on really occluded video: "
-                                  "low light 13.6 -> 4.4 pt, occlusion 22.4 -> 13.9 pt.", GREEN),
+                                  "low light 13.6 -> 2.8 pt, occlusion 22.4 -> 13.6 pt.", GREEN),
         ("Same code everywhere", "One feature pipeline for training, predict(), the live app and the demo "
                                  "renderer: no train/serve skew.", BLUE),
         ("Usable output", "Live caption HUD with confidence and alternatives, transcript, optional speech "
@@ -350,7 +350,7 @@ def build(a):
               "transcript, offline text-to-speech.", "bullet": True},
         {"t": "End-to-end robustness suite: low light, motion blur, occlusion, camera tilt and frame "
               "drops, all through the real video pipeline.", "bullet": True},
-        {"t": "Low-light auto-exposure (dark frames only, ~1 ms) and training on MediaPipe output from really occluded videos.", "bullet": True},
+        {"t": "Low-light auto-exposure (dark frames only, ~1 ms) and training on MediaPipe output from really occluded, blurred and dark videos.", "bullet": True},
         {"t": "Reproducible Kaggle notebooks and a Docker image for the evaluator.", "bullet": True},
     ], size=12, space_after=6)
     text(s8, 5.15, 1.0, 4.4, 0.35, "Limitations and next steps", size=14, bold=True, color=CYAN)

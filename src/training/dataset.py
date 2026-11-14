@@ -52,18 +52,21 @@ class Loader(keras.utils.PyDataset):
     def __init__(self, ds: Packed, idx, num_classes, batch_size=128, preset="full",
                  train=True, seed=0, label_map=None, alt: Packed | None = None, p_alt=0.0, **kw):
         super().__init__(**kw)
-        # v12: alt = the same clips with landmarks taken from REALLY occluded video
-        # (tools/extract_occluded.py). When training, a clip is swapped for its occluded
-        # version with probability p_alt; the epoch length and the label stay the same.
-        self.alt, self.p_alt = alt, p_alt
-        self.alt_of = {}
-        if alt is not None and p_alt > 0:
-            where = {str(v): j for j, v in enumerate(alt.ids)}
-            self.alt_of = {int(i): where[str(ds.ids[i])] for i in idx if str(ds.ids[i]) in where}
         self.ds, self.idx = ds, np.asarray(idx)
         self.k, self.bs, self.preset, self.train = num_classes, batch_size, preset, train
         self.rng = np.random.default_rng(seed)
         self.label_map = label_map            # optional remap dataset label -> model class
+        # v12/v13: alt = the same clips with landmarks taken from REALLY degraded video
+        # (tools/extract_occluded.py: covered, blurred or darkened). One Packed or a list of them,
+        # with one probability each; while training a clip is swapped for one of its degraded
+        # copies with those probabilities. Epoch length and labels stay the same.
+        alts = [] if alt is None else (list(alt) if isinstance(alt, (list, tuple)) else [alt])
+        ps = list(p_alt) if isinstance(p_alt, (list, tuple)) else [p_alt] * len(alts)
+        self.alts, self.p_alts, self.alt_maps = alts, ps, []
+        for a_ds in alts:
+            where = {str(v): j for j, v in enumerate(a_ds.ids)}
+            self.alt_maps.append({int(i): where[str(ds.ids[i])] for i in idx if str(ds.ids[i]) in where})
+        self.alt_of = self.alt_maps[0] if self.alt_maps else {}     # (v12 name, for logging)
         self.order = self.idx.copy()
         self.on_epoch_end()
 
@@ -81,10 +84,17 @@ class Loader(keras.utils.PyDataset):
         y = np.zeros((len(sel), self.k), np.float32)
         rng = np.random.default_rng(self.rng.integers(1 << 31)) if self.train else None
         for j, i in enumerate(sel):
-            j_alt = self.alt_of.get(int(i)) if self.train else None
-            if j_alt is not None and rng.random() < self.p_alt:
-                f = self.alt.clip(j_alt)
-            else:
+            f = None
+            if self.train and self.alts:
+                u, acc = rng.random(), 0.0
+                for a_ds, p, m in zip(self.alts, self.p_alts, self.alt_maps):
+                    acc += p
+                    if u < acc:
+                        j_alt = m.get(int(i))
+                        if j_alt is not None:
+                            f = a_ds.clip(j_alt)
+                        break
+            if f is None:
                 f = self.ds.clip(i)
             if self.train:
                 f = augment(f, rng)

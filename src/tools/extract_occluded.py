@@ -1,4 +1,4 @@
-"""v12: landmarks of REALLY occluded training videos (MediaPipe run on the covered frames).
+"""v12/v13: landmarks of REALLY occluded (and blurred / darkened) training videos (MediaPipe run on the covered frames).
 
 The v9 occlusion augmentation only guesses what MediaPipe does when part of the picture is
 covered (whole hands vanish, pose joints go missing). In practice the detector also loses
@@ -71,6 +71,27 @@ def occlude(frames: list, rng) -> tuple[list, dict]:
     return out, {"shape": shape, "fill": fill, "start": s / n, "span": span / n}
 
 
+def degrade(frames: list, rng) -> tuple[list, dict]:
+    """v13: BGR frames -> a camera-quality problem, half motion blur, half low light.
+      blur   line kernel 5-15 px at a random angle, over 40-100% of the clip
+      dark   brightness x 0.25-0.6, gamma 1.3-2.2, sensor noise sigma 2-6, whole clip"""
+    import cv2
+    n = len(frames)
+    if rng.random() < 0.5:
+        k = int(rng.integers(5, 16)); ang = float(rng.uniform(0, 180))
+        ker = np.zeros((k, k), np.float32); ker[k // 2, :] = 1.0
+        ker = cv2.warpAffine(ker, cv2.getRotationMatrix2D((k / 2 - 0.5, k / 2 - 0.5), ang, 1.0), (k, k))
+        ker /= max(ker.sum(), 1e-6)
+        span = max(1, int(round(n * rng.uniform(0.4, 1.0)))); s = int(rng.integers(0, n - span + 1))
+        out = [cv2.filter2D(f, -1, ker) if s <= i < s + span else f for i, f in enumerate(frames)]
+        return out, {"kind": "blur", "px": k, "angle": round(ang), "start": s / n, "span": span / n}
+    a, g, sd = rng.uniform(0.25, 0.6), rng.uniform(1.3, 2.2), rng.uniform(2, 6)
+    out = [np.clip(255.0 * ((f / 255.0 * a) ** g) + rng.normal(0, sd, f.shape), 0, 255).astype(np.uint8)
+           for f in frames]
+    return out, {"kind": "dark", "gain": round(a, 2), "gamma": round(g, 2), "noise": round(sd, 1)}
+
+
+MODES = {"occ": occlude, "deg": degrade}
 _ex = None
 
 
@@ -89,21 +110,25 @@ def _init(quiet: bool):
 def _work(job):
     from robustness import decode, landmarks
     from echogesture.features import compact
-    vid, path, dst = job
+    vid, path, dsts = job                       # dsts: {mode: output .npy}
     try:
         frames, fps = decode(path)
         if not frames:
             raise RuntimeError("no frames decoded")
-        rng = np.random.default_rng(zlib.crc32(f"occ-train:{vid}".encode()))
-        cov, info = occlude(frames, rng)
-        lm = landmarks(_ex, cov, fps)
-        np.save(dst, compact(lm))
-        return vid, len(lm), info, None
+        infos = {}
+        for mode, dst in dsts.items():
+            seed = "occ-train" if mode == "occ" else f"{mode}-train"   # occ copies identical to v12
+            rng = np.random.default_rng(zlib.crc32(f"{seed}:{vid}".encode()))
+            cov, info = MODES[mode](frames, rng)
+            lm = landmarks(_ex, cov, fps)
+            np.save(dst, compact(lm))
+            infos[mode] = dict(info, frames=len(lm))
+        return vid, infos, None
     except Exception as e:
-        return vid, 0, None, repr(e)
+        return vid, None, repr(e)
 
 
-def pack(lm_dir: Path, subset: int, out: str, min_frames: int = 4):
+def pack(lm_dir: Path, subset: int, out: str, min_frames: int = 4, split_name: str = "occ"):
     """Same .npz layout as training/dataset.py's Packed.write (written here directly so
     this tool never imports Keras: it runs in the MediaPipe environment)."""
     vocab = json.load(open(SRC / "data" / "wlasl" / f"vocab_wlasl{subset}.json"))
@@ -119,21 +144,22 @@ def pack(lm_dir: Path, subset: int, out: str, min_frames: int = 4):
         if len(arr) < min_frames:
             continue
         clips.append(arr); labels.append(pos[r["gloss"]]); signers.append(int(r["signer_id"]))
-        split.append("occ"); ids.append(r["video_id"])
+        split.append(split_name); ids.append(r["video_id"])
     offsets = np.zeros(len(clips) + 1, np.int64)
     offsets[1:] = np.cumsum([len(c) for c in clips])
     np.savez_compressed(out, data=np.concatenate(clips).astype(np.float16), offsets=offsets,
                         labels=np.asarray(labels, np.int32), signers=np.asarray(signers, np.int32),
                         split=np.asarray(split, "<U5"), ids=np.asarray(ids, "<U32"),
                         vocab=np.asarray(vocab, "<U64"))
-    print(f"wrote {out}: {len(ids)} occluded train/val clips", flush=True)
+    print(f"wrote {out}: {len(ids)} {split_name} train/val clips", flush=True)
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--videos", required=True)
-    ap.add_argument("--out", default="runs/occ_lm")
-    ap.add_argument("--pack", default="runs/wlasl300_occ.npz")
+    ap.add_argument("--modes", default="occ", help="comma list of occ (cover) and deg (blur / low light)")
+    ap.add_argument("--out", default="runs/{mode}_lm", help="landmark folder per mode")
+    ap.add_argument("--pack", default="runs/wlasl300_{mode}.npz", help="packed file per mode ('' = skip)")
     ap.add_argument("--subset", type=int, default=300)
     ap.add_argument("--splits", default="train,val", help="never test")
     ap.add_argument("--workers", type=int, default=4)
@@ -141,36 +167,44 @@ def main():
     ap.add_argument("--verbose", action="store_true")
     a = ap.parse_args()
     splits = set(a.splits.split(",")) - {"test"}
+    modes = [m for m in a.modes.split(",") if m]
+    assert all(m in MODES for m in modes), f"modes must be in {list(MODES)}"
+    outs = {m: Path(a.out.format(mode=m)) for m in modes}
+    for o in outs.values():
+        o.mkdir(parents=True, exist_ok=True)
 
-    out = Path(a.out); out.mkdir(parents=True, exist_ok=True)
     jobs = []
     for r in csv.DictReader(open(MANIFEST, newline="")):
         if int(r["gloss_rank"]) >= a.subset or r["split"] not in splits:
             continue
         p = Path(a.videos) / f"{r['video_id']}.mp4"
-        dst = out / f"{r['video_id']}.npy"
-        if p.exists() and not dst.exists():
-            jobs.append((r["video_id"], str(p), str(dst)))
+        dsts = {m: str(outs[m] / f"{r['video_id']}.npy") for m in modes
+                if not (outs[m] / f"{r['video_id']}.npy").exists()}
+        if p.exists() and dsts:
+            jobs.append((r["video_id"], str(p), dsts))
     jobs = jobs[: a.limit or None]
-    print(f"{len(jobs)} {'+'.join(sorted(splits))} clips to cover and extract, {a.workers} workers", flush=True)
-    t0, done, errs, log = time.time(), 0, [], []
+    print(f"{len(jobs)} {'+'.join(sorted(splits))} clips x modes {modes}, {a.workers} workers", flush=True)
+    t0, done, errs, log = time.time(), 0, [], {m: [] for m in modes}
     with ProcessPoolExecutor(a.workers, initializer=_init, initargs=(not a.verbose,)) as ex:
-        for vid, n, info, err in ex.map(_work, jobs, chunksize=2):
+        for vid, infos, err in ex.map(_work, jobs, chunksize=2):
             done += 1
             if err:
                 errs.append((vid, err))
             else:
-                log.append(dict(video_id=vid, frames=n, **info))
+                for m, info in infos.items():
+                    log[m].append(dict(video_id=vid, **info))
             if done % 200 == 0 or done == len(jobs):
                 rate = done / (time.time() - t0)
                 print(f"  {done}/{len(jobs)}  {rate:.2f} clips/s  errors {len(errs)}  "
                       f"eta {(len(jobs) - done) / rate / 60:.0f} min", flush=True)
-    (out / "_covers.json").write_text(json.dumps(log, indent=0))
+    for m in modes:
+        (outs[m] / "_covers.json").write_text(json.dumps(log[m], indent=0))
     if errs:
         print(f"!! {len(errs)} clip(s) failed; first: {errs[0]}", flush=True)
     print(f"extracted in {(time.time() - t0) / 60:.1f} min", flush=True)
     if a.pack:
-        pack(out, a.subset, a.pack)
+        for m in modes:
+            pack(outs[m], a.subset, a.pack.format(mode=m), split_name=m)
 
 
 if __name__ == "__main__":
