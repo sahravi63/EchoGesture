@@ -15,7 +15,7 @@ EchoGesture turns a video of a person signing into an English word, entirely on 
 
 All numbers are on the **official WLASL300 test split (317 videos, signers and clips unseen in training)**, measured with `predict()` on the raw videos exactly as the organisers' evaluator runs it, on a 4-core Kaggle CPU with LiteRT INT8 + XNNPACK. Nothing was tuned on the test split. Every clip is processed independently (a fresh MediaPipe graph per clip), so results do not depend on clip order: running the 317 clips in reverse order gives the same prediction for 317/317. `results/results.csv`, `results/measured.json` and `results/robustness.json` hold the raw numbers.
 
-Demo video (≤ 3 min): **{{VIDEO_URL}}**
+Demo video (≤ 3 min): https://youtu.be/L4Dfx2RSLBs
 
 ---
 
